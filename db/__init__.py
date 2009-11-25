@@ -40,7 +40,7 @@ class SlaveDatabaseWrapper(DatabaseWrapper):
                 'charset': 'utf8',
                 'use_unicode': True,
             }
-            kwargs = pick_random_slave(settings.SLAVE_DATABASES)
+            kwargs.update(pick_random_slave(settings.SLAVE_DATABASES))
             self.connection = Database.connect(**kwargs)
             self.connection.encoders[SafeUnicode] = self.connection.encoders[unicode]
             self.connection.encoders[SafeString] = self.connection.encoders[str]
